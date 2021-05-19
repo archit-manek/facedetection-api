@@ -44,12 +44,12 @@ app.post("/signin", (req, res) => {
 
 app.post("/register", (req, res) => {
   const { email, name, password } = req.body;
-  const saltRounds = 10;
-  const hash = bcrypt.hashSync(password, saltRounds);
+  // const saltRounds = 10;
+  // const hash = bcrypt.hashSync(password, saltRounds);
   db.transaction((trx) => {
     trx
       .insert({
-        hash: hash,
+        hash: password,
         email: email,
       })
       .into("login")
