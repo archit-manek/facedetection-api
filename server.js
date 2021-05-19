@@ -7,10 +7,8 @@ const { response } = require("express");
 const db = knex({
   client: "pg",
   connection: {
-    host: "postgresql-shallow-50863",
-    user: "",
-    password: "",
-    database: "smart-brain",
+    host: process.env.DATABASE_URL,
+    ssl = true,
   },
 });
 
