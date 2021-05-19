@@ -3,6 +3,8 @@ const bcrypt = require("bcrypt");
 const cors = require("cors");
 const knex = require("knex");
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
+
 const db = knex({
   client: "pg",
   connection: {
@@ -44,12 +46,12 @@ app.post("/signin", (req, res) => {
 
 app.post("/register", (req, res) => {
   const { email, name, password } = req.body;
-  // const saltRounds = 10;
-  // const hash = bcrypt.hashSync(password, saltRounds);
+  const saltRounds = 10;
+  const hash = bcrypt.hashSync(password, saltRounds);
   db.transaction((trx) => {
     trx
       .insert({
-        hash: password,
+        hash: hash,
         email: email,
       })
       .into("login")
