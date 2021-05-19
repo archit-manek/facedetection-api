@@ -23,6 +23,7 @@ app.get("/", (req, res) => {
 
 app.post("/signin", (req, res) => {
   const { email, password } = req.body;
+  console.log(`Email: ${email}, password: ${password}`);
   db.select("email", "hash")
     .from("login")
     .where("email", "=", email)
