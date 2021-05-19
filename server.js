@@ -2,15 +2,12 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
 const knex = require("knex");
-const { response } = require("express");
-const { createProxyMiddleware } = require('http-proxy-middleware');
-
 
 const db = knex({
   client: "pg",
   connection: {
     connectionString: process.env.DATABASE_URL,
-    ssl = true,
+    ssl: true,
   },
 });
 
@@ -18,8 +15,6 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use('/signin', createProxyMiddleware({ target: 'https://quiet-ravine-72698.herokuapp.com', changeOrigin: true }));
-
 
 app.get("/", (req, res) => {
   res.send("its working!");
@@ -107,5 +102,5 @@ app.put("/image", (req, res) => {
 });
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log("running");
+  console.log("running on");
 });
