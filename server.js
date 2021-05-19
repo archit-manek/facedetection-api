@@ -46,6 +46,7 @@ app.post("/signin", (req, res) => {
 
 app.post("/register", (req, res) => {
   const { email, name, password } = req.body;
+  console.log(`Email: ${email}, password: ${password}`);
   const saltRounds = 10;
   const hash = bcrypt.hashSync(password, saltRounds);
   db.transaction((trx) => {
