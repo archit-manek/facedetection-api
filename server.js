@@ -3,6 +3,9 @@ const bcrypt = require("bcrypt");
 const cors = require("cors");
 const knex = require("knex");
 const { response } = require("express");
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
+app.use('/signin', createProxyMiddleware({ target: 'https://quiet-ravine-72698.herokuapp.com', changeOrigin: true }));
 
 const db = knex({
   client: "pg",
