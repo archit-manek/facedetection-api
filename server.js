@@ -26,7 +26,6 @@ app.get("/", (req, res) => {
 
 app.post("/signin", (req, res) => {
   const { email, password } = req.body;
-  console.log(`Email: ${email}, password: ${password}`);
   db.select("email", "hash")
     .from("login")
     .where("email", "=", email)
@@ -73,7 +72,7 @@ app.post("/register", (req, res) => {
       })
       .then(trx.commit)
       .catch(trx.rollback);
-  }).catch((err) => res.status(400).json(`Error: ${err}`));
+  }).catch((err) => res.status(400).json(`unable to register`));
 });
 
 app.get("/profile/:id", (req, res) => {
